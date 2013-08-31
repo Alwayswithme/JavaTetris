@@ -1,0 +1,20 @@
+mysql> CREATE DATABASE java_Tetris;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE java_Tetris;
+Database changed
+mysql> CREATE TABLE user_record (id INT(10) PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    -> player VARCHAR(40) NOT NULL,
+    -> score INT(10) NOT NULL,
+    -> type_id INT(5) NOT NULL)CHARSET=utf8;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON java_Tetris.user_record TO 'TetrisGM'@'localhost' IDENTIFIED BY  'gm123';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO user_record(player, score, type_id) VALUES ('钱二',886,1), ( '张三', 1000, 1), ( '李四', 1024, 1), ( '王五', 2048, 1), ('赵六',4564, 1), ( '朱七', 2000, 1), ( '周八', 2000, 1), ('吴九',3032,1);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> use java_Tetris;SELECT * FROM user_record ORDER BY score DESC LIMIT 5;
+mysql -uTetrisGM -hlocalhost -p java_Tetris

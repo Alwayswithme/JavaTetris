@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<frame title="Java Tetris" window_up="32" width="1144"
+			height="700" padding="16" border_size="4" cube_size="5"
+			loseIdx="7">
+		<button w="120" h="40">
+			<start x="806" y="38" />
+			<setting x="954" y="38" />
+		</button>
+		<layer class_name="ui.LayerBackground" x="0" y="0" w="0" h="0" />
+		<layer class_name="ui.LayerGame" x="408" y="16" w="328" h="648" />
+		<layer class_name="ui.LayerDataBase" x="40" y="16" w="328" h="276" />
+		<layer class_name="ui.LayerLocal" x="40" y="340" w="328" h="276" />
+		<layer class_name="ui.LayerButton" x="776" y="16" w="328" h="84" />
+		<layer class_name="ui.LayerHint" x="776" y="132" w="170" h="142" />
+		<layer class_name="ui.LayerLevel" x="952" y="132" w="152" h="142" />
+		<layer class_name="ui.LayerScore" x="776" y="446" w="328" h="170" />
+		<layer class_name="ui.LayerAbout" x="776" y="308" w="328" h="106" />
+	</frame>
+	<system min_x="0" max_x="9" min_y="0" max_y="19" level_up="20" obstacle="5">
+		<cube round="true" coords="4" class_name="entity.I_Shape"><!-- I型 I-Shape -->
+			<point x="4" y="0" /> <point x="3" y="0" /> <point x="5" y="0" /> <point x="6" y="0" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="4" y="2" /> <point x="4" y="3" />
+		</cube>
+		<cube round="true" coords="4" class_name="entity.T_Shape"><!-- T型 T-Shape -->
+			<point x="4" y="0" /> <point x="3" y="0" /> <point x="5" y="0" /> <point x="4" y="1" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="3" y="1" /> <point x="4" y="2" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="3" y="1" /> <point x="5" y="1" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="5" y="1" /> <point x="4" y="2" />
+		</cube>
+		<cube round="true" coords="4" class_name="entity.L_Shape"><!-- L型 T-Shape -->
+			<point x="4" y="0" /> <point x="3" y="0" /> <point x="5" y="0" /> <point x="3" y="1" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="4" y="2" /> <point x="3" y="0" />
+			<point x="4" y="1" /> <point x="3" y="1" /> <point x="5" y="1" /> <point x="5" y="0" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="4" y="2" /> <point x="5" y="2" />
+		</cube>
+		<cube round="true" coords="4" class_name="entity.S_Shape"><!-- S型 S-Shape -->
+			<point x="4" y="0" /> <point x="5" y="0" /> <point x="3" y="1" /> <point x="4" y="1" />
+			<point x="4" y="1" /> <point x="3" y="1" /> <point x="3" y="0" /> <point x="4" y="2" />
+		</cube>
+		<cube round="false" coords="4" class_name="entity.O_Shape"><!-- O型 O-Shape -->
+			<point x="4" y="0" /> <point x="5" y="0" /> <point x="4" y="1" /> <point x="5" y="1" />
+		</cube>
+		<cube round="true" coords="4" class_name="entity.J_Shape"><!-- J型  J-Shape -->
+			<point x="4" y="0" /> <point x="3" y="0" /> <point x="5" y="0" /> <point x="5" y="1" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="4" y="2" /> <point x="3" y="2" />
+			<point x="4" y="1" /> <point x="3" y="1" /> <point x="5" y="1" /> <point x="3" y="0" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="4" y="2" /> <point x="5" y="0" />
+		</cube>
+		<cube round="true" coords="4" class_name="entity.Z_Shape"><!-- Z型 Z-Shape -->
+			<point x="4" y="0" /> <point x="3" y="0" /> <point x="4" y="1" /> <point x="5" y="1" />
+			<point x="4" y="1" /> <point x="4" y="0" /> <point x="3" y="1" /> <point x="3" y="2" />
+		</cube>
+		<bonus rm="1" score="10" />
+		<bonus rm="2" score="30" />
+		<bonus rm="3" score="50" />
+		<bonus rm="4" score="80" />
+		</system>
+	<data max_row="5">
+		<dataDB class_name="dao.DataBase">
+			<param key="driver" value="com.mysql.jdbc.Driver" />
+			<param key="dbUrl" value="jdbc:mysql://localhost:3306/java_Tetris" />
+			<param key="dbUser" value="TetrisGM" />
+			<param key="dbPwd" value="gm123" />
+		</dataDB>
+		<dataLocal class_name="dao.DataLocal">
+			<param key="path" value="data/record.dat" />
+		</dataLocal>
+	</data>
+</game>
