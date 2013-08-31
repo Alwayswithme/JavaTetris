@@ -1,0 +1,10 @@
+HOWTO run:
+open the terminal
+#cd in the game directory
+$cd ~/JavaTetris
+
+#setting CLASSPATH
+$export CLASSPATH=./bin:./lib/dom4j-1.6.1.jar:./lib/mysql-connector.jar
+
+#run and enjoy
+$java main.Main
