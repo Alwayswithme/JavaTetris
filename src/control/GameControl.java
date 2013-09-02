@@ -23,48 +23,52 @@ import dto.GameDto;
 import dto.Player;
 
 /**
- * C:controler 控制键盘事件、获取数据记录 控制画面和游戏逻辑
+ * Controler
+ * control the key event, get the data record,
+ * control the screen and game logic
  */
 public class GameControl {
 	/**
-	 * 数据库数据访问接口
+	 * interface to access the database
 	 */
 	private Data dbData;
 	/**
-	 * 本地记录数据访问接口
+	 * interface to visit the local file
+	 * and get the player record
 	 */
 	private Data localData;
 	/**
-	 * 游戏界面层
+	 * the game main JPanel 
 	 */
 	private JPanelGame panel;
 	/**
-	 * 游戏数据源
+	 * DTO to get the data
 	 */
 	private GameDto gameDto;
 	/**
-	 * 游戏逻辑层
+	 * Service to control game
 	 */
 	private GameService gService;
 	/**
-	 * 设置窗口
+	 * frame use for the game config
 	 */
 	private JFrameConfig frameConfig;
 	/**
-	 * 记录窗口
+	 * frame use for enter info
+	 * when new record show
 	 */
 	private JFrameRecord frameRecord;
 	/**
-	 * 按键映射,放置keycode和method的hashmap
+	 * define the keycode go with what method
+	 * such as move right, rotate
 	 */
 	private Map<Integer, Method> actionMap;
 	/**
-	 * 游戏线程
+	 * the game thread to control
+	 * the terrominoe falling
 	 */
 	private Thread gameThread = null;
-	/**
-	 * 构造器,main方法调用
-	 */
+
 	public GameControl() {
 		// 游戏数据源
 		gameDto = new GameDto();
