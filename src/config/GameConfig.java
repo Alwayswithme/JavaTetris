@@ -10,26 +10,36 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 /**
- * game configure
- * 储存XML配置文件中game元素的嵌套
+ * this class save all the config object
+ * that use to create the game's visual content
  * @author phx
  */
 
 public class GameConfig implements Serializable {
-	/**
-	 * 
-	 */
-
-
     private static final long serialVersionUID = 2906952047756985068L;
+	/**
+	 * use to decied the JFrame
+	 */
 	private static FrameConfig FRAME = null;
+	/**
+	 * use to connect data interface
+	 */
 	private static DataConfig DATA = null;
+	/**
+	 * configure the terrominoe's look and
+	 * bonus when remove line
+	 */
 	private static SystemConfig SYSTEM = null;
 
+	/**
+	 * true to turn on debug mode
+	 */
 	private static final boolean IS_DEBUG = true;
 
 	static {
 		if(IS_DEBUG) {
+			// in debug mode
+			// read the configure object through the xml file
 			//XML reader
 			SAXReader reader = new SAXReader();
 			//XML file
@@ -37,11 +47,10 @@ public class GameConfig implements Serializable {
 			Element game = null;
 			try {
 				doc = reader.read("data/cfg.xml");
-
 				game = doc.getRootElement();
 			} catch (DocumentException e) {
 				e.printStackTrace();
-			}		
+			}
 			//界面配置 frame元素
 			FRAME = new FrameConfig(game.element("frame"));
 			//数据访问配置 data元素
@@ -49,28 +58,28 @@ public class GameConfig implements Serializable {
 			//系统配置  system元素
 			SYSTEM = new SystemConfig(game.element("system"));
 		}else {
+			//not in debug mode
+			//so read the configure object in the file
 			ObjectInputStream ois = null;
-            try {
-	            ois = new ObjectInputStream(new FileInputStream("data/game_config.dat"));
-	            //System.out.println(config.getFRAME().getCubeSize());
-	            
+			try {
+				ois = new ObjectInputStream(new FileInputStream("data/game_config.dat"));
 				FRAME = (FrameConfig) ois.readObject();
 				DATA = (DataConfig) ois.readObject();
 				SYSTEM =  (SystemConfig) ois.readObject();
-            } catch (ClassNotFoundException | IOException e) {
-	            e.printStackTrace();
-            }finally {
-            	if (ois != null) {
-	                try {
-	                    ois.close();
-                    } catch (IOException e) {
-	                    e.printStackTrace();
-                    }
-            	}
-            }
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}finally {
+				if (ois != null) {
+					try {
+						ois.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		}
-
 	}
+
 	/**
 	 * 获得窗口配置
 	 * @return FrameConfig
@@ -92,13 +101,15 @@ public class GameConfig implements Serializable {
 	public static SystemConfig getSYSTEM() {
 		return SYSTEM;
 	}
+	/**
+	 * this method is to create a file
+	 * to store the necessary object
+	 */
 	public static void main(String... args) throws Exception {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/game_config.dat"));
 		oos.writeObject(FRAME);
 		oos.writeObject(DATA);
 		oos.writeObject(SYSTEM);
 		oos.close();
-
-   
 	}
 }

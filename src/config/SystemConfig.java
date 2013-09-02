@@ -7,29 +7,41 @@ import java.util.List;
 import java.util.Map;
 import org.dom4j.Element;
 
-public class SystemConfig implements Serializable{
 	/**
-	 * 
+	 * store the attributes in the system element
 	 */
+public class SystemConfig implements Serializable{
     private static final long serialVersionUID = -8797975232131531734L;
-	/*
-	 * system元素中的6个属性(attribute)
+
+	/**
+	 * the game table which is a coordinates map,
+	 * use these X Y to define the table size.
 	 */
 	private final int minX;
 	private final int maxX;
 	private final int minY;
 	private final int maxY;
-	private final int levelUp;
-	private final int obstacle;
 	/**
-	 * 装有Cube元素的List
-	 * 根据嵌套在System中的cube元素中取得
+	 * decied when how many line get remove
+	 * to upgrade a level
+	 */
+	private final int levelUp;
+	/**
+	 * decied which level to create
+	 * obstacle randomly
+	 */
+	private final int obstacle;
+
+	/**
+	 * List of cube element which is
+	 * to define the terrominoe's rotatablity
+	 * and init location
 	 */
 	private final ArrayList<CubeElement> eCube;
 
 	/**
-	 * 记录奖励信息
-	 * 嵌套在system元素中的score元素
+	 * A map of the bonus(value) and remove how
+	 * many lines(key)
 	 */
 	private final Map<Integer, Integer> bonus;
 	public SystemConfig( Element system) {
@@ -49,8 +61,6 @@ public class SystemConfig implements Serializable{
 			eCube.add(new CubeElement(cube));
 		}
 		this.bonus = new HashMap<Integer, Integer>();
-		
-		
 		//获得奖励元素配置
 		@SuppressWarnings( "unchecked")
         List<Element> eScore = system.elements("bonus");
@@ -79,13 +89,10 @@ public class SystemConfig implements Serializable{
 	public int getLevelUp() {
 		return levelUp;
 	}
-
 	public Map<Integer, Integer> getBonus() {
 		return bonus;
 	}
 	public int getObstacle() {
 		return obstacle;
 	}
-
-
 }

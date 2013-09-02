@@ -4,32 +4,31 @@ import java.io.Serializable;
 import org.dom4j.Element;
 
 public class ButtonConfig implements Serializable{
-	/**
-	 * 
-	 */
     private static final long serialVersionUID = 1024L;
-
 	/*
 	 * 按钮宽度、高度
+	 * button's height and width
 	 */
 	private final int width;
-
 	private final int height;
 
 	/*
 	 * 开始按钮坐标
+	 * start button coordinates
 	 */
 	private final int startX;
-
 	private final int startY;
 
 	/*
 	 * 设置按钮坐标
+	 * setting button coordinates
 	 */
 	private final int settingX;
-
 	private final int settingY;
 
+	/** 
+	 * readding config value from the xml configure file
+	 */
 	public ButtonConfig(Element button) {
 		width = Integer.parseInt(button.attributeValue("w"));
 		height = Integer.parseInt(button.attributeValue("h"));
@@ -42,6 +41,9 @@ public class ButtonConfig implements Serializable{
 		settingX = Integer.parseInt(eSetting.attributeValue("x"));
 		settingY = Integer.parseInt(eSetting.attributeValue("y"));
 	}
+	/**
+	 * only getters
+	 */
 	public int getWidth () {
 		return this.width;
 	}

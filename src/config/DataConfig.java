@@ -9,23 +9,20 @@ import org.dom4j.Element;
  *
  */
 public class DataConfig implements Serializable{
-	/**
-	 * 
-	 */
     private static final long serialVersionUID = 6001674074008029775L;
 	/**
-	 * dataDB元素配置
-	 * 存储有驱动、连接、用户名、密码等信息
+	 * dataDB element configure
+	 * store the info about driver, connector, username and password
 	 */
 	private DataInterfaceConfig dataDB;
 	/**
-	 * dataLocal元素配置
-	 * 存储玩家记录信息保存路径
+	 * dataLocal element configure
+	 * store the player's record save path
 	 */
 	private DataInterfaceConfig dataLocal;
-	
 	/*
-	 * 记录显示条数
+	 * define the numbers of record show in
+	 * the game panel
 	 */
 	private final int maxRow;
 	public int getMaxRow() {

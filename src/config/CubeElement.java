@@ -5,16 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dom4j.Element;
 
+/**
+ * this class use to store the cube element in the xml file
+ */
 public class CubeElement {
 	/**
-	 * 是cube元素的属性
-	 * 装有方块能否旋转的信息
-	 * 记录这种形状需要多少个坐标确定
+	 * define the Terrominoe is rotatable
 	 */
 	private  final boolean rotatable;
 	
+	/**
+	 * use to define how many coordinates is needed for the terrominoe
+	 */
 	private  final int needCoords;
 	
+	/**
+	 * this list to store where the falling terrominoe appear
+	 */
 	private  final ArrayList<Point> initPoints;
 	
 	private final String className;
