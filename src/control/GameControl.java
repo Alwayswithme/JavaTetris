@@ -70,32 +70,32 @@ public class GameControl {
 	private Thread gameThread = null;
 
 	public GameControl() {
-		// 游戏数据源
+		// DataTransferObject aka DTO
 		gameDto = new GameDto();
-		// 创建游戏逻辑块(安装游戏数据源)
+		// game logic service
 		gService = new GameTetris(gameDto);
-		// 从数据库读取数据
+		// reading data from database
 		dbData = configureInit(GameConfig.getDATA().getDataDB());
-		// 将数据库记录存入dto
+		// set the database record to DTO
 		gameDto.setDbRecord(dbData.loadData());
-		// 从本地文件读取数据
+		// reading data from localfile
 		localData = configureInit(GameConfig.getDATA().getDataLocal());
-		// 将本地文件记录存入
+		// set the local record to DTO
 		gameDto.setLocalRecord(localData.loadData());
 		
-		// 游戏面板
+		// let the panel access to DTO(DataTransferObject)
 		panel = new JPanelGame(this, gameDto);
-		// 创建游戏窗口，安装游戏面板
+		// use the panel to initialize JFrame
 		JFrameGame frameGame = new JFrameGame(panel);
 		
-		// 初始化用户配置窗口
+		// initialize the user config window
 		frameConfig = new JFrameConfig("setting", this);
 		this.getFrameConfig().relativeTo(frameGame);
-		// 初始化用户配置窗口
+		// initialize the record window
 		frameRecord = new JFrameRecord(this);
 		this.frameRecord.relativeTo(frameGame);
 		
-		// 初始化游戏按键设置
+		// initialize the keyboard setting
 		setKeyBorad();
 	}
 	
@@ -148,8 +148,10 @@ public class GameControl {
 		}
 		return data;
 	}
-	
-	/* 根据keycode，获得方法名，利用反射调用对应按键方法 */
+	/**
+	 * according to the keycode to get the
+	 * menthod, and use reflect to invoke it
+	 */
 	public void actionByKeyCode(int keyCode) {
 		if (actionMap.containsKey(keyCode))
 			try {
@@ -164,35 +166,37 @@ public class GameControl {
 	}
 	
 	/**
-	 * 设置按钮事件 显示设置界面
+	 * setting button event and
+	 * show a setting window for
+	 * set the key and skin customly
 	 */
 	public void setting() {
 		this.frameConfig.getJLabel().setText("");
 		this.frameConfig.getJLabel().setIcon(null);
 		this.frameConfig.setVisible(true);
-		
 	}
 	
 	/**
-	 * 开始按钮事件 启动游戏
+	 * start button event and let
+	 * the game start
 	 */
 	public void start() {
-		// 游戏初始化
+		//let the service to initialize game
 		gService.startGame();
 		
-		// 面板按钮不可点击
+		// make the button cannot be pressed
 		panel.buttonSwitch(false);
-		// 關閉窗口
+		// close setting window
 		frameConfig.setVisible(false);
 		frameRecord.setVisible(false);
-		// 创建调用方块下落方法的线程
+		// create the thread to get the tetrominoes falling automatically
 		gameThread = new Thread(new FallingThread());
 		gameThread.start();
-
 	}
 	
 	/**
-	 * 子窗口关闭事件
+	 * when setting over, to get the
+	 * focus and set the keyboard
 	 */
 	public void setOver() {
 		this.panel.repaint();
@@ -200,8 +204,7 @@ public class GameControl {
 	}
 	
 	/**
-	 * 失败之后事件处理
-	 * 
+	 * deal with 
 	 * @return
 	 */
 	private void afterLose() {
@@ -239,7 +242,11 @@ public class GameControl {
 		}
 	}
 
-	/* 获取当前玩家名，和分数，刷新记录 */
+	/**
+	 * get current player name and score
+	 * and save it to the database and
+	 * local record
+	 */
 	public void saveScore(String playerName) {
 		Player p = new Player(playerName, gameDto.getStatus().getScore());
 		// 存入本地磁盘
