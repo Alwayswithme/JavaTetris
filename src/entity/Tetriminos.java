@@ -13,10 +13,9 @@ import config.GameConfig;
  * 
  * @author phx
  */
-public class Terrominoe {
+public abstract class Tetriminos {
 
 	public static int MIN_X = GameConfig.getSYSTEM().getMinX();
-	
 	
 	public  static int MAX_X = GameConfig.getSYSTEM().getMaxX();
 	
@@ -25,14 +24,21 @@ public class Terrominoe {
 	protected boolean rotatable;
 	
 	protected byte shapeID;
-	
+	/**
+	 * mark rotate how  many time then use to sync the
+	 * hint picture
+	 */
 	protected int rotateFlag;
-	
+	/**
+	 * use to initialize the Tetriminos
+	 */
 	protected Point[] fallCoords;
-	
+	/**
+	 * use to make a hint shadow
+	 */
 	protected Point[] bottomCoords;
 	
-	public Terrominoe( byte ID, boolean rotatable, int rotateFlag, Point[] fall) {
+	public Tetriminos( byte ID, boolean rotatable, int rotateFlag, Point[] fall) {
 		
 		this.shapeID = ID;
 		this.rotatable = rotatable;
@@ -40,7 +46,7 @@ public class Terrominoe {
 		this.fallCoords = fall;
 	}
 	
-	public Terrominoe( byte ID) {
+	public Tetriminos( byte ID) {
 		this.shapeID = ID;
 	}
 

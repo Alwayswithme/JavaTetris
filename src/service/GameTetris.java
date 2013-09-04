@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.Map;
 import config.GameConfig;
 import dto.GameDto;
-import entity.TerrominoesGenerator;
+import entity.TetriminosGenerator;
 
 public class GameTetris implements GameService {
 	
@@ -74,7 +74,7 @@ public class GameTetris implements GameService {
 			// 刷新下一个方块
 			gameDto.setFallPiece(gameDto.getDropQueue().poll());
 			// 设置下一个方块到队列
-			gameDto.getDropQueue().offer(TerrominoesGenerator.randomTerrominoe());
+			gameDto.getDropQueue().offer(TetriminosGenerator.randomTerrominoe());
 			if (this.isLose()) {
 				// 游戏结束的处理
 				gameDto.setStart(false);
@@ -151,8 +151,6 @@ public class GameTetris implements GameService {
 		gameDto.getStatus().setScore(point + RM_SOCRE.get(exp));
 	}
 	
-	/* 核心方法 */
-	
 	/**
 	 * 按键操作--左
 	 */
@@ -171,7 +169,9 @@ public class GameTetris implements GameService {
 			return false;
 		return gameDto.fallPieceMove(1, 0);
 	}
-	
+	/**
+	 * pause key
+	 */
 	@Override
 	public void keyExtra1() {
 		// 暂停
@@ -179,7 +179,9 @@ public class GameTetris implements GameService {
 			gameDto.changePause();
 		}
 	}
-	
+	/**
+	 * suddenly drop down
+	 */
 	@Override
 	public void keyExtra2() {
 		if (gameDto.getStatus().isPause())
@@ -189,7 +191,9 @@ public class GameTetris implements GameService {
 			;
 		
 	}
-	
+	/**
+	 * shadow switch button
+	 */
 	@Override
 	public void keyExtra3() {
 		// 阴影开关
@@ -198,8 +202,7 @@ public class GameTetris implements GameService {
 	
 	@Override
 	public void keyExtra4() {
-		
-		gameDto.setFallPiece(TerrominoesGenerator.get((byte) 6));
+
 	}
 	
 	/**
@@ -209,10 +212,10 @@ public class GameTetris implements GameService {
 	public void startGame() {
 		// 随机生成下落方块
 		//TODO
-		gameDto.setFallPiece(TerrominoesGenerator.randomTerrominoe());
+		gameDto.setFallPiece(TetriminosGenerator.randomTerrominoe());
 		// 隨機生成下一个方块
 		for (int i = 0; i < 3; ++i) {
-			gameDto.getDropQueue().offer(TerrominoesGenerator.randomTerrominoe());
+			gameDto.getDropQueue().offer(TetriminosGenerator.randomTerrominoe());
 		}
 		// 游戏进入开始状态
 		gameDto.setStart(true);

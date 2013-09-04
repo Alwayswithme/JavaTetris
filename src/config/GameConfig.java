@@ -51,11 +51,11 @@ public class GameConfig implements Serializable {
 			} catch (DocumentException e) {
 				e.printStackTrace();
 			}
-			//界面配置 frame元素
+			//frame element for UI setting 
 			FRAME = new FrameConfig(game.element("frame"));
-			//数据访问配置 data元素
+			//data element for data setting
 			DATA = new DataConfig(game.element("data"));
-			//系统配置  system元素
+			//system element for system setting
 			SYSTEM = new SystemConfig(game.element("system"));
 		}else {
 			//not in debug mode

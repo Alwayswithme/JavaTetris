@@ -11,7 +11,7 @@ import javax.swing.Timer;
 import util.GameFunction;
 import util.GameMethod;
 import config.GameConfig;
-import entity.Terrominoe;
+import entity.Tetriminos;
 
 public class GameDto implements ActionListener{
 	private static final int HARDER = GameConfig.getSYSTEM().getObstacle();
@@ -40,7 +40,7 @@ public class GameDto implements ActionListener{
 
 	private byte[] gameBoard;
 	//下落方块
-	private Terrominoe fallPiece;
+	private Tetriminos fallPiece;
 	
 	//游戏状态
 	private GameStatus status = new GameStatus();
@@ -48,13 +48,13 @@ public class GameDto implements ActionListener{
 	/**
 	 * 将要出现的方块
 	 */
-	private LinkedList<Terrominoe> dropQueue = new LinkedList<Terrominoe>();
+	private LinkedList<Tetriminos> dropQueue = new LinkedList<Tetriminos>();
 
 	/**
 	 * 定时制造障碍物的计时器
 	 */
 	private Timer obstacleTimer;	
-
+	private int obstacleLevel = GameConfig.getSYSTEM().getObstacle();
 
 	public GameDto() {
 		doInit();
@@ -74,7 +74,9 @@ public class GameDto implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (status.level >= 0) {
+		// when the level is bigger than the setting
+		// level, begin to create Obstacle randomly
+		if (status.level >= obstacleLevel) {
 			createObstacle();
 		} 
 	}
@@ -205,15 +207,15 @@ public class GameDto implements ActionListener{
 			obstacleTimer.start();
 		}
 	}
-	public Terrominoe getFallPiece() {
+	public Tetriminos getFallPiece() {
 		return fallPiece;
 	}
 
-	public void setFallPiece(Terrominoe fallPiece) {
+	public void setFallPiece(Tetriminos fallPiece) {
 		this.fallPiece = fallPiece;
 	}
 
-	public LinkedList<Terrominoe> getDropQueue() {
+	public LinkedList<Tetriminos> getDropQueue() {
 		return dropQueue;
 	}
 

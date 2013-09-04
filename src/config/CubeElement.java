@@ -1,6 +1,7 @@
 package config;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.dom4j.Element;
@@ -8,7 +9,7 @@ import org.dom4j.Element;
 /**
  * this class use to store the cube element in the xml file
  */
-public class CubeElement {
+public class CubeElement implements Serializable{
 	/**
 	 * define the Terrominoe is rotatable
 	 */

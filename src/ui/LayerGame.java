@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import config.GameConfig;
 import dto.GameDto;
-import entity.Terrominoe;
+import entity.Tetriminos;
 
 public class LayerGame extends Layer {
 	
@@ -23,7 +23,7 @@ public class LayerGame extends Layer {
 	
 	public void paint(Graphics g) {
 		this.drawContainer(g);
-		Terrominoe fallPiece = gameDto.getFallPiece();
+		Tetriminos fallPiece = gameDto.getFallPiece();
 		if (fallPiece != null) {
 			// 获得方块坐标
 			Point[] points = fallPiece.getFallCoords();

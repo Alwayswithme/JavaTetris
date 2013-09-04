@@ -4,7 +4,7 @@ package ui;
 import java.awt.Graphics;
 import java.awt.Image;
 import util.ImageTool;
-import entity.Terrominoe;
+import entity.Tetriminos;
 
 public class LayerHint extends Layer {
 	
@@ -17,7 +17,7 @@ public class LayerHint extends Layer {
 		//如果游戏开始则画出提示方块
 		if(gameDto.getStatus().isStart()) {
 			// 准备下落的方块
-			Terrominoe next = gameDto.getDropQueue().peek();
+			Tetriminos next = gameDto.getDropQueue().peek();
 			//旋转次数
 			int rotateCount = next.getRotateFlag();
 			// 源提示图片

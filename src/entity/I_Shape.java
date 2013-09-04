@@ -2,7 +2,7 @@ package entity;
 
 import java.awt.Point;
 
-public class I_Shape extends Terrominoe {
+public class I_Shape extends Tetriminos {
 
 	public I_Shape( byte ID, boolean rotatable, int rotateFlag, Point[] fall) {
 	    super(ID, rotatable, rotateFlag, fall);

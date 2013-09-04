@@ -9,7 +9,7 @@ import java.util.Random;
 import config.CubeElement;
 import config.GameConfig;
 
-public class TerrominoesGenerator {
+public class TetriminosGenerator {
 	
 	// 方块ID 与 构造器的映射
 	public static HashMap<Byte, Constructor<?>> factory = new HashMap<Byte, Constructor<?>>();
@@ -31,7 +31,7 @@ public class TerrominoesGenerator {
         }
 		}
 	}
-	public static Terrominoe get(byte shapeID) {
+	public static Tetriminos get(byte shapeID) {
 		CubeElement e = cubeElements.get(shapeID);
 		
 		int coords = e.getNeedCoords();
@@ -51,9 +51,9 @@ public class TerrominoesGenerator {
 			Point temp = allPoints.get(j + start);
 			fallPoint[j] = new Point(temp.x, temp.y);
 		}
-		Terrominoe result = null;
+		Tetriminos result = null;
         try {
-	        result = (Terrominoe) factory.get(shapeID).newInstance(shapeID, rotatable, rotateFlag, fallPoint);
+	        result = (Tetriminos) factory.get(shapeID).newInstance(shapeID, rotatable, rotateFlag, fallPoint);
         } catch (InstantiationException e1) {
 	        e1.printStackTrace();
         } catch (IllegalAccessException e1) {
@@ -66,7 +66,7 @@ public class TerrominoesGenerator {
 		return result;
 	}
 	
-	public static Terrominoe randomTerrominoe() {
+	public static Tetriminos randomTerrominoe() {
 		byte randomId = (byte) rand.nextInt(numOfTerrominoe);
 		return get(randomId);
 	}
