@@ -10,12 +10,15 @@ public class DataInterfaceConfig implements Serializable{
     private static final long serialVersionUID = 3942159714256001928L;
 	/*
 	 * the data interface's fully qualified name
+	 * store in the configure file data element
 	 */
 	private String className;
-	
-	public Map<String, String> getParaMap() {
-		return paraMap;
-	}
+		
+	/*
+	 * map about the database and local data,
+	 * use to store some thing like the 
+	 * database driver'name, and record file's path
+	 */
 	private final Map<String, String> paraMap;
 	
 	public DataInterfaceConfig(Element dataElement) {
@@ -31,7 +34,11 @@ public class DataInterfaceConfig implements Serializable{
 			paraMap.put(e.attribute(0).getValue(), e.attribute(1).getValue());
 		}
 	}
+	
 	public String getClassName() {
 		return className;
+	}
+	public Map<String, String> getParaMap() {
+		return paraMap;
 	}
 }

@@ -100,7 +100,9 @@ public class GameControl {
 	}
 	
 	/**
-	 * 读取按键设置 方法名String作为按键编码(keycode)与按键事件(method)的中枢
+	 * read the keyboard setting
+	 * using a keycode as key, and the value is a method
+	 * when a key press, then invoke the binding method
 	 */
 	public void setKeyBorad() {
 		// 存放按键(keycode)和方法名的映射
@@ -127,20 +129,22 @@ public class GameControl {
 	}
 	
 	/**
-	 * 获取一个配置记录对象，利用反射创建并实例化
-	 * 
-	 * @param cfgData
-	 *            配置记录对象
-	 * @return
+	 * use the data configure object to get a
+	 * new instance of Data (which is a interface in
+	 * the dao package.
+	 * @param dataInterface  data configure object
+	 * @return a Data Access Objects use to get info from
+	 * database and localfile
 	 */
-	public Data configureInit(DataInterfaceConfig cfgData) {
+	public Data configureInit(DataInterfaceConfig dataInterface) {
 		Data data = null;
 		try {
-			Class<?> clas = Class.forName(cfgData.getClassName());
-			// 获得构造器
+			// load the class
+			Class<?> clas = Class.forName(dataInterface.getClassName());
+			// get the constructor
 			Constructor<?> con = clas.getConstructor(HashMap.class);
-			// 创建Data类实例，并返回
-			data = (Data) con.newInstance(cfgData.getParaMap());
+			//  
+			data = (Data) con.newInstance(dataInterface.getParaMap());
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException
 		                | InstantiationException | IllegalAccessException
 		                | IllegalArgumentException | InvocationTargetException e) {
@@ -161,7 +165,6 @@ public class GameControl {
 			                | SecurityException e) {
 				e.printStackTrace();
 			}
-		// 重新刷新画面
 		panel.repaint();
 	}
 	
@@ -204,19 +207,16 @@ public class GameControl {
 	}
 	
 	/**
-	 * deal with 
+	 * deal with situation after lose
 	 * @return
 	 */
 	private void afterLose() {
-		// 如果打破记录，显示保存得分窗口
-		isNewRecord(gameDto.getStatus().getScore());
-		
-		// 使按钮可以点击
-		panel.buttonSwitch(true);
+		isNewRecord(gameDto.getStatus().getScore());	// if it's a new record then show the panel
+		panel.buttonSwitch(true);						// let the button can be press
 	}
 	
 	private void isNewRecord(int finalScore) {
-		// 与本地或数据库第五名分数进行比较
+		// compare to the database's and local file's record
 		if (finalScore > gameDto.getLocalRecord().get(4).getScore() ||
 		                finalScore > gameDto.getDbRecord().get(4).getScore()) {
 			frameRecord.show(finalScore);
@@ -249,17 +249,14 @@ public class GameControl {
 	 */
 	public void saveScore(String playerName) {
 		Player p = new Player(playerName, gameDto.getStatus().getScore());
-		// 存入本地磁盘
+		// save it to database and local disk
 		localData.saveData(p);
-		// 存入数据库
 		dbData.saveData(p);
-		// 将数据库记录存入dto
-		gameDto.setDbRecord(dbData.loadData());
-		// 将本地文件记录存入
+		// reload the record to dto
 		gameDto.setLocalRecord(localData.loadData());
-		// 刷新畫面
+		gameDto.setDbRecord(dbData.loadData());
+
 		panel.repaint();
-		
 	}
 
 	/*  getters  */

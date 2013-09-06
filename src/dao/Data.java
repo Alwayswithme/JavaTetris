@@ -4,12 +4,12 @@ import dto.Player;
 
 public interface Data {
 	/**
-	 * 读取数据
+	 * load data
 	 */
 	List<Player> loadData();
 
 	/**
-	 * 存储数据
+	 * save data
 	 */
 	void saveData(Player player);
 }

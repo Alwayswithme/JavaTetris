@@ -17,10 +17,22 @@ public class DataBase implements Data {
 
 	private static Connection DB_CONNECT =  null;
 	private static PreparedStatement stmt = null;
+	
+	/**
+	 * SQL for load data
+	 * load five row from data base and order by high score 
+	 * to low score
+	 */
 	private static String LOAD_SQL = "SELECT player, score, type_id FROM user_record WHERE type_id = ? ORDER BY score DESC LIMIT 5";
+	
+	/**
+	 * SQL for save data
+	 * insert the player record to database
+	 */
 	private static String SAVE_SQL = "INSERT INTO java_Tetris.user_record(player, score, type_id) VALUES (? , ?, 1)";
 	public DataBase(HashMap<String, String> paraMap) {
 		try {
+			//load the driver
 	        Class.forName(paraMap.get("driver"));
         } catch (ClassNotFoundException e) {
 	        e.printStackTrace();
@@ -34,8 +46,8 @@ public class DataBase implements Data {
 		ResultSet result = null;
 		List<Player> players = new ArrayList<Player>(5);
 		try {
+			// getting connect to the database
 			DB_CONNECT = DriverManager.getConnection(dbUrl, dbUser, dbPwd);
-			
 			stmt = DB_CONNECT.prepareStatement(LOAD_SQL);
 			stmt.setInt(1, 1);
 			result = stmt.executeQuery();
@@ -43,7 +55,8 @@ public class DataBase implements Data {
 	        	players.add(new Player(result.getString(1), result.getInt(2)));
 	        }
         } catch (SQLException e) {
-	        //e.printStackTrace();
+	        // usually, we don't need a database and the program will catch 
+	        //the Exception 
         }finally {
         	try {
 	            if(result != null)
@@ -71,12 +84,14 @@ public class DataBase implements Data {
 			stmt.setInt(2, p.getScore());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			try {
-				stmt.close();
+				if(stmt != null)
+	            	stmt.close();
 				stmt = null;
-				DB_CONNECT.close();
+				if (DB_CONNECT != null)
+	            	DB_CONNECT.close();
 				DB_CONNECT = null;
 			} catch (SQLException e) {
 				e.printStackTrace();

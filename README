@@ -1,5 +1,5 @@
 HOWTO run:
-open your terminal
+open your terminal and install java-1.7 jre
 #cd in the game directory
 $cd ~/JavaTetris
 

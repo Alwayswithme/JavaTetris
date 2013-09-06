@@ -138,5 +138,4 @@ public class JPanelGame extends JPanel {
 		// 面板获得焦点
 		this.requestFocus();
 	}
-
 }

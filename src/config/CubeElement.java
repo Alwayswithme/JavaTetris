@@ -11,6 +11,11 @@ import org.dom4j.Element;
  */
 public class CubeElement implements Serializable{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * define the Terrominoe is rotatable
 	 */
 	private  final boolean rotatable;
