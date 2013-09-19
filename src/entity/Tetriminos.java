@@ -49,10 +49,13 @@ public abstract class Tetriminos {
 	public Tetriminos( byte ID) {
 		this.shapeID = ID;
 	}
-
+	/**
+	 *  rotate method
+	 * @return coordinates after rotate
+	 */
 	public Point[] rotate() {
 		Point[] rotated = GameMethod.copyCoords(fallCoords);
-		
+		// if the coords in the boundary move to left or right first
 		if(rotated[0].x == MIN_X) {
 			move(rotated, 1, 0);
 		}else if(rotated[0].x == MAX_X) {

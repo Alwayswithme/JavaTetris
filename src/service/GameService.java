@@ -21,7 +21,7 @@ public interface GameService {
 	
 	void keyExtra4();
 	
-	void startGame();
+	void gameRun();
 	
 	void mainAction();
 }

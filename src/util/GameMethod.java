@@ -7,7 +7,7 @@ public class GameMethod {
 	/**
 	 * 复制坐标点集合
 	 * @param coords 要复制的Point[]数组
-	 * @return 
+	 * @return 和coords一样的数组
 	 */
 	public static Point[] copyCoords(Point[] coords) {
 	    int len = coords.length;

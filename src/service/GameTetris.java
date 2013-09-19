@@ -56,8 +56,6 @@ public class GameTetris implements GameService {
 			return true;
 		} else {
 			// 方块不可以下落,将方块填充到容器
-			
-			
 			// 获取下落方块各坐标
 			Point[] coords = gameDto.getFallPiece().getFallCoords();
 			// 填充到地图数组
@@ -209,7 +207,7 @@ public class GameTetris implements GameService {
 	 * 开始游戏 : 生成下落方块，填充刷新方块的队列，改变状态标记位，初始化
 	 */
 	@Override
-	public void startGame() {
+	public void gameRun() {
 		// 随机生成下落方块
 		//TODO
 		gameDto.setFallPiece(TetriminosGenerator.randomTerrominoe());

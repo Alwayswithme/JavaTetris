@@ -17,13 +17,12 @@ public abstract class Layer {
 	protected static GameDto gameDto;
 	// 窗口的边框大小
 	public static int BORDER_SIZE;
-	
 	// 内边距
 	protected static final int PADDING;
 	// 绘制专用字体
 	protected static final Font MY_FONT = new Font("AR PL UMing CN", Font.PLAIN, 17);
 	// 绘制专用数字格式右对齐
-	protected static final String form = "%1$7s";
+	protected static final String LEFT_PAD_FORMAT = "%1$7s";
 	// 窗口素材宽高
 	protected static final int WINDOW_W, WINDOW_H;
 	// 值槽图片宽高
@@ -35,7 +34,6 @@ public abstract class Layer {
 		FrameConfig fCfg = GameConfig.getFRAME();
 		BORDER_SIZE = fCfg.getBorderSize();
 		PADDING = fCfg.getPadding();
-
 		WINDOW_W = GameImg.WINDOW.getWidth(null);
 		WINDOW_H = GameImg.WINDOW.getHeight(null);
 		NUM_W = GameImg.NUM.getWidth(null) / 10;
@@ -218,7 +216,6 @@ public abstract class Layer {
 	 */
 	protected void drawRect(int y, double rate, Graphics g, String describe, String num) {
 		// 绘制外围边框
-		
 		// 绘制一个黑色外围边框
 		g.setColor(Color.BLACK);
 		g.drawRect(TITLE_X, y, EXP_WIDTH, RECT_H + 4);
@@ -243,7 +240,7 @@ public abstract class Layer {
 		g.drawString(describe, TITLE_X + 10, y + 25);
 		// 如果传入数字不为空则绘制数字
 		if (num != null) {
-			g.drawString(String.format(form, num), TITLE_X + 220, y + 25);
+			g.drawString(String.format(LEFT_PAD_FORMAT, num), TITLE_X + 220, y + 25);
 		}
 	}
 	

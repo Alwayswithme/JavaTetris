@@ -86,7 +86,7 @@ public class DataLocal implements Data {
 		if (players == null ) {
 			players = new ArrayList<>(5);
 		}
-		test(player, players);
+		newRecord(player, players);
 		ObjectOutputStream oos = null;
 		try {
 	        oos = new ObjectOutputStream(new FileOutputStream(savFile));
@@ -103,9 +103,10 @@ public class DataLocal implements Data {
 			}
         }
 	}
-
-	public static void test(Player player, List<Player> players) {
-	    
+	/*
+	 * create a new record list
+	 */
+	public static void newRecord(Player player, List<Player> players) {	    
 		if (players.size() >= 5) {
 			//排序后比较，如果大于第五名则取代他
 			Collections.sort(players);

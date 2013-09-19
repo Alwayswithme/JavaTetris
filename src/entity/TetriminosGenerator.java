@@ -16,23 +16,24 @@ public class TetriminosGenerator {
 	// 随机数生成器
 	public static Random rand = new Random();
 	// 方块所有属性
-	public static ArrayList<CubeElement>  cubeElements = GameConfig.getSYSTEM().getECube();
+	public static ArrayList<CubeElement>  tetriminosList = GameConfig.getSYSTEM().getECube();
 	
-	public static int numOfTerrominoe = cubeElements.size();
+	public static int numOfTerrominoe = tetriminosList.size();
+	// create a map, key is the tetriminos id and value is the construcor
 	static {
 		for (Byte i = 0, len = (byte) numOfTerrominoe; i < len; i++) {
-			String cName = cubeElements.get(i).getClassName();
-		try {
-			Class<?> c = Class.forName(cName);
-			Constructor<?>[] cons = c.getConstructors();
-			factory.put(i, cons[0]);
-        } catch (SecurityException | ClassNotFoundException e) {
-	        e.printStackTrace();
+			String cName = tetriminosList.get(i).getClassName();
+			try {
+				Class<?> c = Class.forName(cName);
+				Constructor<?>[] cons = c.getConstructors();
+				factory.put(i, cons[0]);
+			} catch (SecurityException | ClassNotFoundException e) {
+				e.printStackTrace();
         }
 		}
 	}
 	public static Tetriminos get(byte shapeID) {
-		CubeElement e = cubeElements.get(shapeID);
+		CubeElement e = tetriminosList.get(shapeID);
 		
 		int coords = e.getNeedCoords();
 		

@@ -185,7 +185,7 @@ public class GameControl {
 	 */
 	public void start() {
 		//let the service to initialize game
-		gService.startGame();
+		gService.gameRun();
 		
 		// make the button cannot be pressed
 		panel.buttonSwitch(false);
