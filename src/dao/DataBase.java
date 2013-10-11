@@ -1,13 +1,19 @@
 package dao;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
+
+import config.DataConfig;
+import config.GameConfig;
+
 import dto.Player;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class DataBase implements Data {
 	private final String dbUrl;
@@ -55,8 +61,9 @@ public class DataBase implements Data {
 	        	players.add(new Player(result.getString(1), result.getInt(2)));
 	        }
         } catch (SQLException e) {
-	        // usually, we don't need a database and the program will catch 
-	        //the Exception 
+	        // database not available, trun it off
+        	if (e instanceof CommunicationsException)
+        		DataConfig.DBnotAvailable();
         }finally {
         	try {
 	            if(result != null)
@@ -84,7 +91,7 @@ public class DataBase implements Data {
 			stmt.setInt(2, p.getScore());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		} finally {
 			try {
 				if(stmt != null)

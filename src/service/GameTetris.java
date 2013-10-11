@@ -178,7 +178,7 @@ public class GameTetris implements GameService {
 		}
 	}
 	/**
-	 * suddenly drop down
+	 * drop down immediately
 	 */
 	@Override
 	public void keyExtra2() {

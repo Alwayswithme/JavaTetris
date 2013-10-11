@@ -16,6 +16,7 @@ import ui.JPanelGame;
 import ui.cfg.CfgResources;
 import ui.cfg.JFrameConfig;
 import ui.cfg.JFrameRecord;
+import config.DataConfig;
 import config.DataInterfaceConfig;
 import config.GameConfig;
 import dao.Data;
@@ -251,11 +252,12 @@ public class GameControl {
 		Player p = new Player(playerName, gameDto.getStatus().getScore());
 		// save it to database and local disk
 		localData.saveData(p);
-		dbData.saveData(p);
 		// reload the record to dto
 		gameDto.setLocalRecord(localData.loadData());
-		gameDto.setDbRecord(dbData.loadData());
-
+		if (DataConfig.isDBavailable()) {
+			dbData.saveData(p);
+			gameDto.setDbRecord(dbData.loadData());
+		}
 		panel.repaint();
 	}
 

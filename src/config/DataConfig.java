@@ -15,6 +15,12 @@ public class DataConfig implements Serializable{
 	 * store the info about driver, connector, username and password
 	 */
 	private DataInterfaceConfig dataDB;
+
+	/**
+	 * when database is not available
+	 * then can turn it to false
+	 */
+	public static Boolean DBavailable = true;
 	/**
 	 * dataLocal element configure
 	 * store the player's record save path
@@ -41,5 +47,13 @@ public class DataConfig implements Serializable{
 	
 	public DataInterfaceConfig getDataLocal() {
 		return dataLocal;
+	}
+
+	public static Boolean isDBavailable() {
+		return DBavailable;
+	}
+
+	public static void DBnotAvailable() {
+		DBavailable = false;
 	}
 }

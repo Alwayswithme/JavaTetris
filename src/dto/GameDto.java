@@ -58,6 +58,7 @@ public class GameDto implements ActionListener{
 
 	public GameDto() {
 		doInit();
+		//TODO
 		obstacleTimer = new Timer(60000, this);
 	}
 
